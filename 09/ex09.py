@@ -15,13 +15,12 @@ def neighbors(x, y):
     return (x-1,y), (x,y-1), (x,y+1), (x+1,y)
 
 def floodfill(map, coord, mark=9):
-    r = coord[0]
-    c = coord[1]
+    r, c = coord
     if map[r][c] == mark:
         return 0
     else:
         map[r][c] = mark
-        return 1 + sum(floodfill(map, c) for c in neighbors(*coord))
+        return 1 + sum(floodfill(map, c, mark) for c in neighbors(*coord))
 
 heightmap = read_input('input.txt')
 padded_map = pad_map(heightmap)
